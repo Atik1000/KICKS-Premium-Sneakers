@@ -7,6 +7,8 @@ import { ProductGrid } from '@/components/products/ProductGrid';
 import { ProductGridSkeleton } from '@/components/products/ProductGridSkeleton';
 import { AsyncContent } from '@/components/async/AsyncContent';
 import { HeroBanner } from '@/components/home/HeroBanner';
+import { CategoriesSection } from '@/components/home/CategoriesSection';
+import { ReviewsSection } from '@/components/home/ReviewsSection';
 import { ROUTES } from '@/lib/constants';
 
 /**
@@ -59,6 +61,12 @@ export default function HomePage() {
             </AsyncContent>
           )}
         </section>
+
+        {/* Categories carousel — API data, arrow navigation */}
+        <CategoriesSection />
+
+        {/* Reviews — product images from API, mock review content */}
+        <ReviewsSection />
       </PageLayout>
     </div>
   );
