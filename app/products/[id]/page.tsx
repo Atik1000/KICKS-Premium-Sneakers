@@ -60,6 +60,7 @@ export default function ProductDetailPage() {
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
               priority
+              unoptimized
             />
           </div>
           <div className="flex flex-1 flex-col lg:py-4">

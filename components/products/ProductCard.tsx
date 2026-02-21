@@ -1,8 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { ShoppingBag } from 'lucide-react';
 import type { ApiProduct } from '@/types';
 import { addToCart } from '@/store/slices/cartSlice';
@@ -16,7 +16,9 @@ interface ProductCardProps {
  */
 export function ProductCard({ product }: ProductCardProps) {
   const dispatch = useDispatch();
+  const [imageError, setImageError] = useState(false);
   const imageUrl = product.images?.[0] || product.category?.image || 'https://placehold.co/400x400';
+  const fallbackUrl = 'https://placehold.co/400x400?text=No+Image';
   const price = typeof product.price === 'number' ? product.price : 0;
 
   const handleAddToCart = (e: React.MouseEvent) => {
@@ -27,13 +29,22 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <article className="group flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md">
       <Link href={`/products/${product.id}`} className="relative block aspect-square overflow-hidden bg-gray-100">
-        <Image
-          src={imageUrl}
-          alt={product.title}
-          fill
-          className="object-cover transition-transform group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
+        <div className="relative h-full w-full">
+          {imageError ? (
+            <img
+              src={fallbackUrl}
+              alt={product.title}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <img
+              src={imageUrl}
+              alt={product.title}
+              className="h-full w-full object-cover transition-transform group-hover:scale-105"
+              onError={() => setImageError(true)}
+            />
+          )}
+        </div>
       </Link>
       <div className="flex flex-1 flex-col p-4">
         <Link href={`/products/${product.id}`} className="mb-1 font-medium text-gray-900 hover:underline line-clamp-2">
