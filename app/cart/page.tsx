@@ -1,13 +1,15 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import { Minus, Plus, Trash2 } from 'lucide-react';
 import { RootState } from '@/store';
 import { removeFromCart, updateQuantity } from '@/store/slices/cartSlice';
 import { PageLayout } from '@/components/layout/PageLayout';
+import { ProductImage } from '@/components/products/ProductImage';
 import { EmptyState } from '@/components/ui/EmptyState';
+import { formatPrice } from '@/lib/format';
+import { ROUTES } from '@/lib/constants';
 
 /**
  * Cart page - displays cart items from Redux store
@@ -49,24 +51,17 @@ export default function CartPage() {
                 className="flex gap-4 rounded-lg border border-gray-200 bg-white p-4"
               >
                 <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-md bg-gray-100">
-                  <Image
-                    src={item.images?.[0] || item.category?.image || 'https://placehold.co/100'}
-                    alt={item.title}
-                    fill
-                    className="object-cover"
-                    sizes="96px"
-                    unoptimized
-                  />
+                  <ProductImage product={item} alt={item.title} className="h-full w-full object-cover" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <Link
-                    href={`/products/${item.id}`}
+                    href={ROUTES.productById(item.id)}
                     className="font-medium text-gray-900 hover:underline line-clamp-2"
                   >
                     {item.title}
                   </Link>
                   <p className="mt-1 text-sm text-gray-500">{item.category?.name}</p>
-                  <p className="mt-2 font-semibold text-gray-900">${item.price.toFixed(2)}</p>
+                  <p className="mt-2 font-semibold text-gray-900">{formatPrice(item.price)}</p>
                 </div>
                 <div className="flex flex-col items-end gap-2">
                   <div className="flex items-center gap-1 rounded border border-gray-200">
@@ -103,20 +98,20 @@ export default function CartPage() {
           <div className="w-full shrink-0 lg:w-80">
             <div className="rounded-lg border border-gray-200 bg-white p-6">
               <h2 className="mb-4 text-lg font-semibold text-gray-900">Order Summary</h2>
-              <div className="space-y-2">
+                <div className="space-y-2">
                 <div className="flex justify-between text-gray-600">
                   <span>Subtotal</span>
-                  <span>${total.toFixed(2)}</span>
+                  <span>{formatPrice(total)}</span>
                 </div>
                 <div className="border-t border-gray-200 pt-2 font-semibold text-gray-900">
                   <div className="flex justify-between">
                     <span>Total</span>
-                    <span>${total.toFixed(2)}</span>
+                    <span>{formatPrice(total)}</span>
                   </div>
                 </div>
               </div>
               <Link
-                href="/"
+                href={ROUTES.home}
                 className="mt-4 block w-full rounded-md bg-gray-900 py-3 text-center text-white hover:bg-gray-800"
               >
                 Continue Shopping

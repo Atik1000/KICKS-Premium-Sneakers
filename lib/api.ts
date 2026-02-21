@@ -1,6 +1,6 @@
 /**
- * API configuration
- * Platzi Fake Store API - uses escuelajs.co backend
+ * API configuration - Platzi Fake Store API
+ * Task spec: fakeapi.platzi.com | Backend: api.escuelajs.co (same data)
  */
 export const API_BASE_URL = 'https://api.escuelajs.co/api/v1';
 

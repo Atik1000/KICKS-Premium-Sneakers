@@ -5,15 +5,12 @@ import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { Search, User, ShoppingBag, Menu, X } from 'lucide-react';
 import { RootState } from '@/store';
+import { ROUTES } from '@/lib/constants';
 
-/**
- * Navigation link configuration
- * Centralized navigation data for easy maintenance and updates
- */
 const NAV_LINKS = [
-  { href: '/', label: 'Products' },
-  { href: '/categories', label: 'Categories' },
-  { href: '/cart', label: 'Cart' },
+  { href: ROUTES.home, label: 'Products' },
+  { href: ROUTES.categories, label: 'Categories' },
+  { href: ROUTES.cart, label: 'Cart' },
 ] as const;
 
 /**
@@ -65,7 +62,7 @@ export function Navbar() {
             
             {/* Brand Logo */}
             <Link 
-              href="/" 
+              href={ROUTES.home} 
               className="text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors duration-200"
               aria-label="KICKS Home"
             >
@@ -111,7 +108,7 @@ export function Navbar() {
 
             {/* Shopping Cart Button with Item Count Badge */}
             <Link
-              href="/cart"
+              href={ROUTES.cart}
               className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors duration-200"
               aria-label={`Shopping cart with ${cartItemCount} items`}
             >
