@@ -1,23 +1,129 @@
-import { Navbar } from '@/components/layout/Navbar';
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+import { useSelector, useDispatch } from 'react-redux';
+import { Minus, Plus, Trash2 } from 'lucide-react';
+import { RootState } from '@/store';
+import { removeFromCart, updateQuantity } from '@/store/slices/cartSlice';
+import { PageLayout } from '@/components/layout/PageLayout';
+import { EmptyState } from '@/components/ui/EmptyState';
 
 /**
- * Cart Page Component
- * 
- * Displays the shopping cart with items
+ * Cart page - displays cart items from Redux store
  */
 export default function CartPage() {
+  const dispatch = useDispatch();
+  const items = useSelector((state: RootState) => state.cart.items);
+
+  const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const handleUpdateQuantity = (id: number, delta: number) => {
+    const item = items.find((i) => i.id === id);
+    if (!item) return;
+    const newQty = Math.max(0, item.quantity + delta);
+    if (newQty === 0) {
+      dispatch(removeFromCart(id));
+    } else {
+      dispatch(updateQuantity({ id, quantity: newQty }));
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-      
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Shopping Cart</h1>
-        
-        <div className="bg-white rounded-lg shadow-sm p-8 text-center">
-          <p className="text-gray-600">Your cart is currently empty</p>
-          <p className="text-sm text-gray-500 mt-2">Add some awesome kicks to get started!</p>
+    <PageLayout>
+      <h1 className="mb-8 text-3xl font-bold text-gray-900">Shopping Cart</h1>
+
+      {items.length === 0 && (
+        <EmptyState
+          message="Your cart is empty"
+          description="Add some products to get started."
+        />
+      )}
+
+      {items.length > 0 && (
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-start">
+          <div className="flex-1 space-y-4">
+            {items.map((item) => (
+              <div
+                key={item.id}
+                className="flex gap-4 rounded-lg border border-gray-200 bg-white p-4"
+              >
+                <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-md bg-gray-100">
+                  <Image
+                    src={item.images?.[0] || item.category?.image || 'https://placehold.co/100'}
+                    alt={item.title}
+                    fill
+                    className="object-cover"
+                    sizes="96px"
+                  />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <Link
+                    href={`/products/${item.id}`}
+                    className="font-medium text-gray-900 hover:underline line-clamp-2"
+                  >
+                    {item.title}
+                  </Link>
+                  <p className="mt-1 text-sm text-gray-500">{item.category?.name}</p>
+                  <p className="mt-2 font-semibold text-gray-900">${item.price.toFixed(2)}</p>
+                </div>
+                <div className="flex flex-col items-end gap-2">
+                  <div className="flex items-center gap-1 rounded border border-gray-200">
+                    <button
+                      type="button"
+                      onClick={() => handleUpdateQuantity(item.id, -1)}
+                      className="p-2 hover:bg-gray-100"
+                      aria-label="Decrease quantity"
+                    >
+                      <Minus className="h-4 w-4" />
+                    </button>
+                    <span className="min-w-[2ch] px-2 text-center">{item.quantity}</span>
+                    <button
+                      type="button"
+                      onClick={() => handleUpdateQuantity(item.id, 1)}
+                      className="p-2 hover:bg-gray-100"
+                      aria-label="Increase quantity"
+                    >
+                      <Plus className="h-4 w-4" />
+                    </button>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => dispatch(removeFromCart(item.id))}
+                    className="text-red-600 hover:text-red-700"
+                    aria-label="Remove from cart"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="w-full shrink-0 lg:w-80">
+            <div className="rounded-lg border border-gray-200 bg-white p-6">
+              <h2 className="mb-4 text-lg font-semibold text-gray-900">Order Summary</h2>
+              <div className="space-y-2">
+                <div className="flex justify-between text-gray-600">
+                  <span>Subtotal</span>
+                  <span>${total.toFixed(2)}</span>
+                </div>
+                <div className="border-t border-gray-200 pt-2 font-semibold text-gray-900">
+                  <div className="flex justify-between">
+                    <span>Total</span>
+                    <span>${total.toFixed(2)}</span>
+                  </div>
+                </div>
+              </div>
+              <Link
+                href="/"
+                className="mt-4 block w-full rounded-md bg-gray-900 py-3 text-center text-white hover:bg-gray-800"
+              >
+                Continue Shopping
+              </Link>
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+      )}
+    </PageLayout>
   );
 }

@@ -11,7 +11,7 @@ import { RootState } from '@/store';
  * Centralized navigation data for easy maintenance and updates
  */
 const NAV_LINKS = [
-  { href: '/', label: 'Home' },
+  { href: '/', label: 'Products' },
   { href: '/categories', label: 'Categories' },
   { href: '/cart', label: 'Cart' },
 ] as const;
@@ -34,9 +34,9 @@ export function Navbar() {
   // Local state for mobile menu visibility
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
-  // Get cart items from Redux store to display count badge
+  // Get total cart quantity from Redux store for badge
   const cartItems = useSelector((state: RootState) => state.cart.items);
-  const cartItemCount = cartItems.length;
+  const cartItemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   /**
    * Toggles the mobile menu open/closed state
