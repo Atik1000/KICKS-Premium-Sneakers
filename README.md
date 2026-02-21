@@ -1,15 +1,16 @@
 # KICKS Premium Sneakers
 
-A modern e-commerce platform for premium sneakers and athletic footwear built with Next.js 14.
+A modern e-commerce frontend built with Next.js 14 and integrated with the Platzi Fake Store API.
 
 ## 🚀 Features
 
-- ✅ **Responsive Navigation Bar** with mobile menu and cart integration
-- 🎨 **Modern UI** using Tailwind CSS
-- 🔄 **Redux State Management** for cart functionality
-- 📱 **Mobile-First Design** with smooth animations
-- ♿ **Accessibility** features (ARIA labels, semantic HTML)
-- 🎯 **TypeScript** for type safety
+- **Product Listing** – Landing page with products from API
+- **Product Detail** – Single product page with add to cart
+- **Categories** – Browse categories and filter products by category
+- **Shopping Cart** – Add, remove, update quantity (local state)
+- **Loading / Error / Empty states** – Proper UI states for all API requests
+- **Responsive** – Mobile and desktop layouts
+- **Redux + RTK Query** – Clean data fetching and state management
 
 ## 🛠️ Tech Stack
 
@@ -17,53 +18,42 @@ A modern e-commerce platform for premium sneakers and athletic footwear built wi
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS
 - **State Management:** Redux Toolkit
+- **Data Fetching:** RTK Query
 - **Icons:** Lucide React
 
 ## 📦 Installation
 
 ```bash
-# Install dependencies
 npm install
-
-# Run development server
 npm run dev
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
 ```
+
+## 🔗 API
+
+Uses [Platzi Fake Store API](https://fakeapi.platzi.com) (backend: `api.escuelajs.co`):
+
+- Products: `GET /products`, `GET /products/:id`
+- Categories: `GET /categories`, `GET /categories/:id`, `GET /categories/:id/products`
 
 ## 📁 Project Structure
 
 ```
-kicks-premium-sneakers/
-├── app/              # Next.js app directory
-├── components/       # React components
-│   ├── layout/       # Layout components (Navbar, Footer)
-│   └── ui/           # Reusable UI components
-├── lib/              # Utility functions and configs
-├── store/            # Redux store and slices
-├── types/            # TypeScript type definitions
-└── public/           # Static assets
+├── app/
+│   ├── page.tsx              # Landing (products)
+│   ├── cart/page.tsx
+│   ├── categories/page.tsx
+│   ├── categories/[id]/products/page.tsx
+│   └── products/[id]/page.tsx
+├── components/
+│   ├── layout/               # Navbar, PageLayout
+│   ├── products/             # ProductCard, ProductGrid
+│   └── ui/                   # LoadingSpinner, ErrorState, EmptyState
+├── store/
+│   ├── api/productsApi.ts    # RTK Query endpoints
+│   └── slices/cartSlice.ts
+├── lib/api.ts                # API config
+└── types/index.ts            # ApiProduct, ApiCategory, CartItem
 ```
-
-## 🎯 Current Implementation
-
-### Section 1: Navigation Bar ✅
-
-A production-ready responsive navbar featuring:
-- Brand logo with hover effects
-- Desktop navigation links with animated underlines
-- Search, profile, and cart icons
-- Mobile hamburger menu with smooth transitions
-- Real-time cart item count badge
-- Sticky positioning
-
-## 🔄 Development Workflow
-
-This project is being built section by section with proper Git commits for each feature. See [GIT_WORKFLOW.md](./GIT_WORKFLOW.md) for detailed instructions.
 
 ## 📝 License
 
