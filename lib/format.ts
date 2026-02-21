@@ -16,8 +16,14 @@ export function getErrorMessage(
   return fallback;
 }
 
-/** Formats price for display */
+/** Formats price for display (e.g. $125.00) */
 export function formatPrice(price: number): string {
   const value = typeof price === 'number' && !Number.isNaN(price) ? price : 0;
   return `$${value.toFixed(2)}`;
+}
+
+/** Formats price compact for buttons (e.g. $125) */
+export function formatPriceShort(price: number): string {
+  const value = typeof price === 'number' && !Number.isNaN(price) ? price : 0;
+  return `$${Math.round(value)}`;
 }

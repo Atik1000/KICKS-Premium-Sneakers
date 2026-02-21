@@ -1,14 +1,16 @@
 'use client';
 
+import Link from 'next/link';
 import { useGetProductsQuery } from '@/store/api/productsApi';
 import { PageLayout } from '@/components/layout/PageLayout';
 import { ProductGrid } from '@/components/products/ProductGrid';
 import { AsyncContent } from '@/components/async/AsyncContent';
 import { HeroBanner } from '@/components/home/HeroBanner';
+import { ROUTES } from '@/lib/constants';
 
 /**
  * Landing page - product listing from API with hero banner
- * Matches Figma design: Hero banner + "New Drops" product grid
+ * Matches Figma: Hero + "Don't Miss Out New Drops" heading + product grid
  */
 export default function HomePage() {
   const { data, isLoading, isError, error, refetch } = useGetProductsQuery();
@@ -19,17 +21,24 @@ export default function HomePage() {
         {/* Hero Banner Section - Full Width */}
         <HeroBanner />
 
-        {/* New Drops Section - Contained */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-          <div className="mb-8">
-            <h2 className="text-4xl lg:text-5xl font-black text-black mb-2">
+        {/* New Drops Section - Figma Frame 22: 1320px, gap 32px */}
+        <section className="w-full max-w-[1320px] mx-auto px-4 sm:px-[60px] py-12 lg:py-16 flex flex-col gap-8">
+          {/* Heading + CTA row */}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <h2 className="font-rubik font-bold text-[#232321] text-3xl sm:text-4xl lg:text-5xl leading-tight">
               DON&apos;T MISS OUT
-            </h2>
-            <h2 className="text-4xl lg:text-5xl font-black text-black">
+              <br />
               NEW DROPS
             </h2>
+            <Link
+              href={ROUTES.products}
+              className="inline-flex items-center justify-center shrink-0 h-12 px-6 bg-[#4A69E2] text-white font-semibold text-sm uppercase tracking-wide rounded-lg hover:opacity-90 transition-opacity"
+            >
+              SHOP NEW DROPS
+            </Link>
           </div>
 
+          {/* Product cards from API */}
           <AsyncContent
             isLoading={isLoading}
             isError={isError}
