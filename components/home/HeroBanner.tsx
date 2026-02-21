@@ -18,29 +18,24 @@ export function HeroBanner() {
   ];
 
   return (
-    <section className="relative w-full bg-gradient-to-br from-yellow-100 to-yellow-200 overflow-hidden">
-      {/* Background texture */}
-      <div className="absolute inset-0 opacity-10" style={{
-        backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.1) 10px, rgba(0,0,0,0.1) 20px)'
-      }} />
-      
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          
+    <section className="relative w-full overflow-hidden">
+      {/* Same alignment as navbar: px-[60px] + max-w-[1320px] mx-auto px-8 */}
+      <div className="relative px-4 sm:px-[60px] py-12 lg:py-20">
+        <div className="max-w-[1320px] mx-auto px-4 sm:px-8">
+          {/* "DO IT RIGHT" - One line, aligned with navbar content */}
+          <div className="w-full mb-8 lg:mb-12 overflow-visible">
+          <h1
+            className="font-rubik font-bold uppercase leading-[100%] whitespace-nowrap text-[48px] sm:text-[80px] md:text-[120px] lg:text-[160px] xl:text-[223.5px]"
+            style={{ letterSpacing: 0 }}
+          >
+            <span style={{ color: '#232321' }}>DO IT </span>
+            <span style={{ color: '#4A69E2' }}>RIGHT</span>
+          </h1>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Side - Text Content */}
           <div className="relative z-10">
-            {/* "DO IT RIGHT" Text */}
-            <div className="mb-8">
-              <h1 className="text-6xl lg:text-8xl font-black leading-tight">
-                <span className="text-black">DO IT</span>
-                <br />
-                <span className="text-blue-600 relative">
-                  RIGHT
-                  <span className="absolute -inset-2 border-4 border-red-500 opacity-50" />
-                </span>
-              </h1>
-            </div>
-
             {/* Product Label */}
             <div className="mb-6">
               <span className="inline-block bg-black text-white px-4 py-2 text-sm font-semibold uppercase tracking-wider rotate-[-2deg]">
@@ -108,6 +103,7 @@ export function HeroBanner() {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </section>
