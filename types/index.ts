@@ -1,25 +1,43 @@
 /**
- * Product interface
- * Represents a product in the store
+ * API Category - matches Platzi Fake Store API response
  */
-export interface Product {
+export interface ApiCategory {
   id: number;
   name: string;
-  brand: string;
-  price: number;
+  slug: string;
   image: string;
-  category: string;
-  description?: string;
-  sizes?: string[];
-  colors?: string[];
 }
 
 /**
- * Cart item interface
- * Extends Product with quantity and selected options
+ * API Product - matches Platzi Fake Store API response
+ */
+export interface ApiProduct {
+  id: number;
+  title: string;
+  slug: string;
+  price: number;
+  description: string;
+  category: ApiCategory;
+  images: string[];
+}
+
+/**
+ * Product interface for app usage
+ * Normalized from API with backward compatibility for cart
+ */
+export interface Product {
+  id: number;
+  title: string;
+  slug: string;
+  price: number;
+  description: string;
+  category: ApiCategory;
+  images: string[];
+}
+
+/**
+ * Cart item - extends Product with quantity
  */
 export interface CartItem extends Product {
   quantity: number;
-  selectedSize?: string;
-  selectedColor?: string;
 }
