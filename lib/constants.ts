@@ -17,3 +17,17 @@ export const PLACEHOLDER_IMAGE = {
   category: 'https://placehold.co/600x400?text=Category',
   cart: 'https://placehold.co/100?text=No+Image',
 } as const;
+
+/**
+ * Static image paths - use images from public/images/
+ * e.g. <img src={STATIC_IMAGES.logo.default} alt="Logo" />
+ */
+export const STATIC_IMAGES = {
+  logo: {
+    default: '/images/logo/logo.png',
+    icon: '/images/logo/icon.png',
+  },
+  products: '/images/products/',
+  categories: '/images/categories/',
+  ui: '/images/ui/',
+} as const;
