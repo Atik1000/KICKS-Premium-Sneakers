@@ -12,7 +12,7 @@ interface PageLayoutProps {
  */
 export function PageLayout({ children, fullWidth = false }: PageLayoutProps) {
   return (
-    <div className="flex min-h-screen flex-col bg-[#E7E7E3]">
+    <div className="flex min-h-screen w-full flex-col bg-[#E7E7E3]">
       <Navbar />
       {fullWidth ? (
         <main className="flex-1">{children}</main>

@@ -21,7 +21,7 @@ export default function HomePage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#E7E7E3]">
+    <div className="min-h-screen w-full bg-[#E7E7E3]">
       <PageLayout fullWidth>
         {/* Hero Banner Section - Full Width */}
         <HeroBanner />

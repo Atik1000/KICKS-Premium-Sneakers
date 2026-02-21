@@ -28,10 +28,12 @@ export function Footer() {
   const categoryLinks = categories?.length ? categories.slice(0, 6) : FALLBACK_CATEGORIES;
 
   return (
-    <footer className="mt-auto w-full overflow-hidden rounded-t-[32px] bg-[#1a1a1a]">
-      {/* Top section — blue, newsletter + footer-top-logo */}
-      <div className="flex flex-col items-center justify-between gap-8 bg-[#4A69E2] px-4 py-10 sm:flex-row sm:px-[60px] sm:py-12 lg:gap-16">
-        <div className="flex-1">
+    <footer className="mt-auto w-full bg-[#E7E7E3] px-4 py-0 sm:px-[60px]">
+      {/* Contained block: small blue top, then black below — layout bg shows on sides */}
+      <div className="mx-auto max-w-[1320px] overflow-hidden rounded-t-[32px]">
+        {/* Top section — small blue */}
+        <div className="flex flex-col items-center justify-between gap-8 bg-[#4A69E2] px-4 py-10 sm:flex-row sm:px-[60px] sm:py-12 lg:gap-16">
+          <div className="flex-1">
           <h3 className="mb-2 font-rubik text-xl font-bold uppercase leading-tight text-white sm:text-2xl lg:text-3xl">
             JOIN OUR KICKSPLUS CLUB & GET 15% OFF
           </h3>
@@ -56,8 +58,8 @@ export function Footer() {
               SUBMIT
             </button>
           </form>
-        </div>
-        <div className="relative hidden shrink-0 sm:block">
+          </div>
+          <div className="relative hidden shrink-0 sm:block">
           <Image
             src={FOOTER_TOP_LOGO}
             alt="Kicks Plus"
@@ -66,12 +68,12 @@ export function Footer() {
             className="object-contain"
             unoptimized
           />
+          </div>
         </div>
-      </div>
 
-      {/* Middle section — dark gray, 4 columns */}
-      <div className="mx-auto max-w-[1320px] px-4 py-12 sm:px-[60px] lg:py-16">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Down section — black, 4 columns + big logo */}
+        <div className="bg-[#1a1a1a] px-4 py-12 sm:px-[60px] lg:py-16">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* About us */}
           <div>
             <h4 className="mb-4 font-rubik text-sm font-bold uppercase tracking-wide text-[#FF6B35]">
@@ -155,12 +157,12 @@ export function Footer() {
               </a>
             </div>
           </div>
+          </div>
         </div>
-      </div>
 
-      {/* Bottom section — large Logo.png + copyright */}
-      <div className="border-t border-white/10 px-4 py-10 sm:px-[60px] sm:py-12">
-        <div className="flex flex-col items-center justify-center gap-4 text-center">
+        {/* Bottom — large Logo.png + copyright */}
+        <div className="border-t border-white/10 bg-[#1a1a1a] px-4 py-10 sm:px-[60px] sm:py-12">
+          <div className="flex flex-col items-center justify-center gap-4 text-center">
           <Image
             src={FOOTER_LOGO}
             alt="Kicks"
@@ -170,6 +172,7 @@ export function Footer() {
             unoptimized
           />
           <p className="text-sm text-white/80">© All rights reserved</p>
+          </div>
         </div>
       </div>
     </footer>
