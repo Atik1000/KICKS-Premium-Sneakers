@@ -24,7 +24,7 @@ export const PLACEHOLDER_IMAGE = {
  */
 export const STATIC_IMAGES = {
   logo: {
-    default: '/images/logo/logo.png',
+    default: '/images/logo/Logo.svg',
     icon: '/images/logo/icon.png',
   },
   products: '/images/products/',

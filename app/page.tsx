@@ -14,7 +14,7 @@ export default function HomePage() {
   const { data, isLoading, isError, error, refetch } = useGetProductsQuery();
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#E7E7E3]">
       <PageLayout fullWidth>
         {/* Hero Banner Section - Full Width */}
         <HeroBanner />

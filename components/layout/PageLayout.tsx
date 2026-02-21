@@ -11,7 +11,7 @@ interface PageLayoutProps {
  */
 export function PageLayout({ children, fullWidth = false }: PageLayoutProps) {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#E7E7E3]">
       <Navbar />
       {fullWidth ? (
         <main>{children}</main>
