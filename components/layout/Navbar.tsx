@@ -11,10 +11,9 @@ import { RootState } from '@/store';
  * Centralized navigation data for easy maintenance and updates
  */
 const NAV_LINKS = [
-  { href: '/', label: 'New Drops' },
-  { href: '/men', label: 'Men' },
-  { href: '/women', label: 'Women' },
-  { href: '/sale', label: 'Sale' },
+  { href: '/', label: 'Home' },
+  { href: '/categories', label: 'Categories' },
+  { href: '/cart', label: 'Cart' },
 ] as const;
 
 /**
